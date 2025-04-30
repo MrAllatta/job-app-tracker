@@ -1,5 +1,26 @@
 "use strict";
 // initialize_sheets.ts - Auto-create spreadsheet and sheets
+// ---------------------------------------------
+function installOnEditTrigger() {
+    var scriptProps = PropertiesService.getScriptProperties();
+    var ssId = scriptProps.getProperty(SCRIPT_PROP_SHEET_ID);
+    var triggers = ScriptApp.getProjectTriggers();
+    var hasTrigger = triggers.some(function (t) { return t.getHandlerFunction() === 'onEdit'; });
+    if (hasTrigger) {
+        Logger.log('installOnEditTrigger: onEdit trigger already exists');
+        return;
+    }
+    try {
+        var ss = SpreadsheetApp.openById(ssId);
+        ScriptApp.newTrigger('onEdit')
+            .forSpreadsheet(ss)
+            .onEdit()
+            .create();
+        Logger.log('installOnEditTrigger: onEdit trigger installed');
+    } catch (e) {
+        Logger.log('installOnEditTrigger: failed to install onEdit trigger: ' + e.message);
+    }
+}
 function initializeSheets() {
     var scriptProps = PropertiesService.getScriptProperties();
     var ssId = scriptProps.getProperty(SCRIPT_PROP_SHEET_ID);
@@ -31,4 +52,5 @@ function initializeSheets() {
         clickSheet.appendRow(['Timestamp', 'Application ID', 'Stage', 'Destination', 'User Agent']);
     }
     Logger.log("Spreadsheet URL: ".concat(ss.getUrl()));
+    installOnEditTrigger();
 }
