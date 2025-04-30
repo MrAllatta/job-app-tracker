@@ -1,0 +1,23 @@
+{
+  "manifestVersion": "1",
+  "name": "Your App Name",
+  "version": "1.0.0",
+  "description": "A pixel and click tracker for job searching.",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ],
+  "addOns": {
+    "common": {
+      "name": "Eric Allatta",
+      "logoUrl": "",
+      "useMaterialDesign": true
+    },
+    "editor": {
+      "homepageTrigger": {
+        "runFunction": "onHomepage"
+      }
+    }
+  }
+}
+

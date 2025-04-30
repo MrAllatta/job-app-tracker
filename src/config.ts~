@@ -1,0 +1,6 @@
+// config.ts - Project constants (v1)
+
+export const SHEET_ID = 'YOUR_SPREADSHEET_ID_HERE';
+export const APPLICATION_SHEET = 'Applications';
+export const PIXEL_LOG_SHEET = 'Pixel Log';
+export const CLICK_LOG_SHEET = 'Click Log';
