@@ -6,5 +6,13 @@ function resetSystem(): void {
     DriveApp.getFileById(ssId).setTrashed(true);
     scriptProps.deleteProperty(SCRIPT_PROP_SHEET_ID);
   }
+  // Remove existing onEdit triggers
+  const triggers = ScriptApp.getProjectTriggers();
+  triggers.forEach(trigger => {
+    if (trigger.getHandlerFunction() === 'onEdit') {
+      ScriptApp.deleteTrigger(trigger);
+      Logger.log(`resetSystem: Deleted onEdit trigger ${trigger.getUniqueId()}`);
+    }
+  });
   initializeSheets();
 }
