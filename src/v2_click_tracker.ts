@@ -1,20 +1,20 @@
 // v2_click_tracker.ts - Click event tracker and redirector
+/**
+ * Handle click tracking and redirect
+ */
 function handleClick(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.HTML.HtmlOutput {
-  const appId = e.parameter.id;
-  const stage = e.parameter.stage;
-  const destination = e.parameter.destination || '';
-  const userAgent = e.parameter.ua || 'Unknown';
-  if (appId && stage && destination) {
-    logClick(appId, stage, destination, userAgent);
+  // Parse and validate parameters
+  const id = e.parameter.id || '';
+  const company = e.parameter.company || '';
+  const jobTitle = e.parameter.job || '';
+  const stage = e.parameter.stage || '';
+  const redirect = e.parameter.redirect || '';
+  if (id && company && jobTitle && stage && redirect) {
+    logClick(id, company, jobTitle, stage, redirect);
+  } else {
+    Logger.log(`handleClick: missing parameters, received ${JSON.stringify(e.parameter)}`);
   }
-  const html = `
-    <html>
-      <head>
-        <script>window.location.href = ${JSON.stringify(destination)};</script>
-      </head>
-      <body></body>
-    </html>`;
-  const output = HtmlService.createHtmlOutput(html);
-  output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
-  return output;
+  // Redirect via client-side script
+  const html = `<script>window.location.href="${redirect}"</script>`;
+  return HtmlService.createHtmlOutput(html);
 }
