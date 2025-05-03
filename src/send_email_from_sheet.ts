@@ -10,7 +10,7 @@ function sendPendingEmailsFromSheet(): void {
   const values = dataRange.getValues() as any[][];
   for (let i = 1; i < values.length; i++) {
     const row = values[i];
-    const sentFlag = row[14]; // Column O (Sent Flag)
+    const sentFlag = row[15]; // Column P (Sent Flag)
     if (sentFlag) continue;
     const to = row[9] as string;           // Column J (To Email)
     const cc = row[10] as string;          // Column K (CC Email)
@@ -18,12 +18,12 @@ function sendPendingEmailsFromSheet(): void {
       Logger.log(`sendPendingEmailsFromSheet: missing 'to' email for row ${i + 1}`);
       continue;
     }
-    const subject = row[11] as string;     // Column L (Subject)
-    const body = row[12] as string;        // Column M (Message Body)
-    const pixelUrl = row[4] as string;     // Column E (Pixel URL)
-    const clickUrl = row[5] as string;     // Column F (Click URL)
-    const htmlBody = htmlifyMessage(body, pixelUrl, clickUrl);
-    const attachmentsStr = row[13] as string; // Column N (Attachments)
+    const subject = row[11] as string;        // Column L (Subject)
+    const body = row[12] as string;           // Column M (Message Body)
+    const pixelUrl = row[4] as string;        // Column E (Pixel URL)
+    const clickUrl = row[5] as string;        // Column F (Click URL)
+    const htmlBody = row[13];                 // Column N (Rendered HTML)
+    const attachmentsStr = row[14] as string; // Column O (Attachments)
     const attachmentNames = attachmentsStr
       ? attachmentsStr.split(',').map(s => s.trim()).filter(s => s)
       : [];

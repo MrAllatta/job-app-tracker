@@ -51,7 +51,7 @@ function onEdit(e: GoogleAppsScript.Events.SheetsOnEdit): void {
     return;
   }
 
-  const htmlBody = htmlifyMessage(messageBody, pixelUrlValue, clickUrlValue);
+  const htmlBody = htmlifyMessage(messageBody, pixelUrlValue, clickUrlValue, applicationId, company, jobTitle, stage);
   sheet.getRange(row, RENDERED_HTML_COL).setValue(htmlBody);
 }
 
