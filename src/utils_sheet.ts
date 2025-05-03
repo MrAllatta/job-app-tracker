@@ -12,14 +12,29 @@ function getSheet(name: string): GoogleAppsScript.Spreadsheet.Sheet {
   return sheet;
 }
 
-function logPixel(appId: string, stage: string, userAgent: string): void {
+/**
+ * Log a pixel event with structured parameters
+ * @param appId Application ID
+ * @param company Company name
+ * @param jobTitle Job title
+ * @param stage Application stage
+ */
+function logPixel(appId: string, company: string, jobTitle: string, stage: string): void {
   const sheet = getSheet(PIXEL_LOG_SHEET);
-  sheet.appendRow([new Date(), appId, stage, userAgent]);
+  sheet.appendRow([new Date(), appId, company, jobTitle, stage]);
 }
 
-function logClick(appId: string, stage: string, destination: string, userAgent: string): void {
+/**
+ * Log a click event with structured parameters
+ * @param appId Application ID
+ * @param company Company name
+ * @param jobTitle Job title
+ * @param stage Application stage
+ * @param redirect Redirect URL
+ */
+function logClick(appId: string, company: string, jobTitle: string, stage: string, redirect: string): void {
   const sheet = getSheet(CLICK_LOG_SHEET);
-  sheet.appendRow([new Date(), appId, stage, destination, userAgent]);
+  sheet.appendRow([new Date(), appId, company, jobTitle, stage, redirect]);
 }
 
 function updateApplicationLastOpened(appId: string): void {
