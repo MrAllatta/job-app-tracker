@@ -38,7 +38,16 @@ https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?id=APPLICATION_ID&sta
 ## Click URL format
 
 https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?click=true&id=APPLICATION_ID&stage=STAGE&destination=DESTINATION_URL
- 
+
+## Portfolio Analytics Tracking Pixel
+
+Track page views on your static (Jekyll) site by embedding an invisible 1×1 tracking pixel. Events are logged to the "PortfolioAnalytics" sheet (created automatically).
+
+HTML example:
+```html
+<img src="https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?pixel=portfolio&path=/about&referrer=teaching-portfolio" width="1" height="1" style="display:none" />
+```
+
 ## Initialize System
  
 - In the Apps Script editor or via clasp, run the `initializeSheets` function to create the necessary Google Sheets and store the Spreadsheet ID.
